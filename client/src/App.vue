@@ -20,4 +20,17 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+.input-group--text-field input {
+  border-bottom: 1px solid black;
+}
+
+.v-toolbar__title {
+  color: white;
+}
+
+.v-btn__content {
+  color: white;
+}
+
 </style>

@@ -1,22 +1,22 @@
 <template>
-  <v-layout column>
+  <v-layout row wrap>
     <v-flex xs6 offset-xs3>
       <div class="white elevation-2">
-        <v-toolbar flat dense class="cyan" dark>
+        <v-toolbar flat dense class="cyan">
           <v-toolbar-title>Register</v-toolbar-title>
         </v-toolbar>
-        <div class="pl-4 pr-4 pr-2 pd-2">
-          <input
-            type="email"
-            name="email"
+
+        <div class="pl-4 pr-4 pt-2 pb-2">
+          <v-text-field
+            label="Email"
             v-model="email"
-            placeholder="email" />
+          ></v-text-field>
           <br>
-          <input
-            type="password"
-            name="password"
+          <v-text-field
+            label="Password"
             v-model="password"
-            placeholder="password" />
+            type="password"
+          ></v-text-field>
           <br>
           <div class="error" v-html="error" />
           <br>
@@ -25,10 +25,10 @@
             @click="register">
             Register
           </v-btn>
-        </div>  
+        </div>
       </div>
     </v-flex>
-  </v-layout>  
+  </v-layout>
 </template>
 
 <script>
