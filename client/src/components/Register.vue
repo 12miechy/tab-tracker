@@ -2,7 +2,7 @@
   <v-layout row wrap>
     <v-flex xs6 offset-xs3>
       <div class="white elevation-2">
-        <v-toolbar flat dense class="cyan">
+        <v-toolbar flat dense class="cyan" dark>
           <v-toolbar-title>Register</v-toolbar-title>
         </v-toolbar>
 
@@ -21,6 +21,7 @@
           <div class="error" v-html="error" />
           <br>
           <v-btn
+            dark
             class="cyan"
             @click="register">
             Register
