@@ -12,9 +12,18 @@ app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
 
-app.get('/status', (req, res) => {
+// CORSを許可する
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
+// memo: app.getだとpostmanもgetを指定する必要がある。
+//app.get('/status', (req, res) => {
+app.post('/register', (req, res) => {
     res.send({
-        message: 'hello world!'
+        message: `Hello ${req.body.email}! Your user was registered! Have fun!`
     })
 })
 
