@@ -31,13 +31,16 @@ module.exports = {
 
       if (!user) {
         return res.status(403).send({
-          error: 'The login information was incorrect'
+          error: 'The login account was not found'
         })
       }
 
-      const isPasswordValid = password === user.password
-      console.log(password, user.password)
+      console.log('call isPasswordValid')
+      const isPasswordValid = await user.comparePassword(password)
+      console.log('isPasswordValid:', isPasswordValid)
+      // console.log(password, user.password)
       if (!isPasswordValid) {
+        console.log('The login information was incorrect')
         return res.status(403).send({
           error: 'The login information was incorrect'
         })
