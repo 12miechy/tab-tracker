@@ -2,26 +2,7 @@
   <div>
     <v-layout>
       <v-flex xs6>
-        <panel title="Song Metadate">
-          <v-layout>
-            <v-flex xs6>
-              <div class="song-title">
-                {{song.title}}
-              </div>
-              <div class="song-artist">
-                {{song.artist}}
-              </div>
-              <div class="song-genre">
-                {{song.genre}}
-              </div>
-            </v-flex>
-            <v-flex xs6>
-              <img class="album-image" :src="song.albumImageUrl" />
-              <br/>
-              {{song.album}}
-            </v-flex>
-          </v-layout>
-        </panel>
+        <song-metadata :song="song" />
       </v-flex>
 
       <v-flex xs6>
@@ -35,10 +16,10 @@
       </v-flex>
     </v-layout>
 
-    <v-layout>
+    <!-- v-layout>
       <v-flex xs6>
         <panel title="YouTube Video">
-          <!-- youtube embedded -->
+          
         </panel>
       </v-flex>
       <v-flex xs6 class="ml-2">
@@ -50,11 +31,12 @@
           ></textarea>
         </panel>
       </v-flex>
-    </v-layout>
+    </v-layout -->
   </div>
 </template>
 
 <script>
+import SongMetadata from './SongMetadata'
 import SongsService from '@/services/SongsService'
 import Panel from '@/components/Panel'
 
