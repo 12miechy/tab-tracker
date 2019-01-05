@@ -16,6 +16,7 @@ module.exports = {
   async show (req, res) {
     try {
       const song = await Song.findById(req.params.songId)
+      console.log('song:', song)
       res.send(song)
     } catch (err) {
       res.status(500).send({

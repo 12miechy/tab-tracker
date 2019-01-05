@@ -4,7 +4,7 @@
       <panel title="Songs">
         <v-btn
           slot="action"
-          @click="navigeteTo({name: 'songs-create'})"
+          @click="navigateTo({name: 'songs-create'})"
           class="cyan accent-2"
           light
           medium
@@ -34,7 +34,7 @@
               <v-btn
                 dark
                 class="cyan"
-                @click="navigeteTo({
+                @click="navigateTo({
                   name: 'song',
                   params: {
                     songId: song.id
@@ -62,7 +62,7 @@ export default {
     Panel
   },
   methods: {
-    navigeteTo (route) {
+    navigateTo (route) {
       this.$router.push(route)
     }
   },
