@@ -1,6 +1,6 @@
 <template>
-  <panel title="Song Metadate">
-    <v-layout>
+  <panel title="Song Metadate" class="ml-2">
+    <v-layout class="song">
       <v-flex xs6>
         <div class="song-title">
           {{song.title}}
@@ -36,7 +36,7 @@ export default {
 <style scoped>
 .song {
   padding: 20px;
-  height: 330px;
+  height: 300px;
   overflow: hidden;
 }
 .song-title {
