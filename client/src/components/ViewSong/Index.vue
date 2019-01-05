@@ -4,8 +4,11 @@
       <v-flex xs6>
         <song-metadata :song="song" />
       </v-flex>
+      <v-flex xs6 class="ml-2">
+        <you-tube :youtubeId="song.youtubeId" />
+      </v-flex>
 
-      <v-flex xs6>
+      <!-- v-flex xs6>
         <panel title="Tabs" class="ml-2">
           <textarea class="textarea"
             readonly
@@ -13,13 +16,13 @@
             v-model="song.tab"
           ></textarea>
         </panel>
-      </v-flex>
+      </v-flex-->
     </v-layout>
 
     <!-- v-layout>
       <v-flex xs6>
         <panel title="YouTube Video">
-          
+
         </panel>
       </v-flex>
       <v-flex xs6 class="ml-2">
@@ -37,6 +40,7 @@
 
 <script>
 import SongMetadata from './SongMetadata'
+import YouTube from './YouTube'
 import SongsService from '@/services/SongsService'
 import Panel from '@/components/Panel'
 
@@ -51,35 +55,14 @@ export default {
     this.song = (await SongsService.show(songId)).data
   },
   components: {
-    Panel
+    Panel,
+    SongMetadata,
+    YouTube
   }
 }
 </script>
 
 <style scoped>
-.song {
-  padding: 20px;
-  height: 330px;
-  overflow: hidden;
-}
-
-.song-title {
-  font-size: 30px;
-}
-
-.song-artist {
-  font-size: 24px;
-}
-
-.song-genre {
-  font-size: 18x;
-}
-
-.album-image {
-  width: 70%;
-  margin: 0 auto;
-}
-
 .textarea {
   width: 100%;
   font-family: monospace;
