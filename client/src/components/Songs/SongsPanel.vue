@@ -52,19 +52,25 @@
 
 <script>
 import SongsService from '@/services/SongsService'
+
 export default {
-  methods: {
-    navigateTo (route) {
-      this.$router.push(route)
-    }
-  },
   data () {
     return {
       songs: null
     }
   },
-  async mounted () {
-    this.songs = (await SongsService.index()).data
+  methods: {
+    navigateTo (route) {
+      this.$router.push(route)
+    }
+  },
+  watch: {
+    '$route.query.search': {
+      immediate: true,
+      async handler (value) {
+        this.songs = (await SongsService.index(value)).data
+      }
+    }
   }
 }
 </script>
