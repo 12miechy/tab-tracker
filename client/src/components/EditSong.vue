@@ -71,6 +71,7 @@
 </template>
 
 <script>
+import Panel from '@/components/Panel'
 import SongsService from '@/services/SongsService'
 
 export default {
@@ -105,7 +106,7 @@ export default {
       try {
         await SongsService.put(this.song)
         this.$router.push({
-          name: 'songs',
+          name: 'song',
           params: {
             songId: songId
           }
@@ -122,6 +123,9 @@ export default {
     } catch (err) {
       console.log(err)
     }
+  },
+  components: {
+    Panel
   }
 }
 </script>
