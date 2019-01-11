@@ -25,6 +25,22 @@
           }">
           Edit
         </v-btn>
+
+        <v-btn
+          v-if="isUserLoggedIn && !isBookmarked"
+          dark
+          class="cyan"
+          @click="unbookmark">
+          Bookmark
+        </v-btn>
+
+        <v-btn
+          v-if="isUserLoggedIn && isBookmarked"
+          dark
+          class="cyan"
+          @click="Bookmark">
+          UnBookmark
+        </v-btn>
       </v-flex>
       <v-flex xs6>
         <img class="album-image" :src="song.albumImageUrl" />
@@ -36,10 +52,60 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import BookmarkService from '@/services/BookmarkService'
+
 export default {
   props: [
     'song'
-  ]
+  ],
+  data () {
+    return {
+      isBookmarked: false
+    }
+  },
+  computed: {
+    ...mapState([
+      'isUserLoggedIn'
+    ])
+  },
+  async mounted () {
+    if (!this.isUserLoggedIn) {
+      return
+    }
+
+    try {
+      const bookmark = (await BookmarkService.index({
+        sondId: this.song.id,
+        userId: this.$store.state.user.id
+      })).data
+      this.isBookmarked = !!bookmark
+    } catch (err) {
+      console.log(err)
+    }
+  },
+  methods: {
+    async bookmark () {
+      try {
+        await BookmarkService.post({
+          sondId: this.song.id,
+          userId: this.$store.state.user.id
+        })
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async unBookmark () {
+      try {
+        await BookmarkService.delete({
+          sondId: this.song.id,
+          userId: this.$store.state.user.id
+        })
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  }
 }
 </script>
 

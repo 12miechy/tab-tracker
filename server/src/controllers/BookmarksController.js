@@ -13,7 +13,42 @@ module.exports = {
       res.send(bookmark)
     } catch (err) {
       res.status(500).send({
-        error: 'an error has bccured trying to fetch the songs.'
+        error: 'an error has bccured trying to fetch the bookmark.'
+      })
+    }
+  },
+  async post (req, res) {
+    try {
+      const { songId, userId } = req.body
+      const bookmark = await Bookmark.findOne({
+        where: {
+          SongId: songId,
+          UserId: userId
+        }
+      })
+      if (bookmark) {
+        return res.status(400).send({
+          error: 'you alredy hab this set as a bookmark'
+        })
+      }
+
+      const newBookmark = Bookmark.create(req.body)
+      res.send(newBookmark)
+    } catch (err) {
+      res.status(500).send({
+        error: 'an error has bccured trying to create the bookmark.'
+      })
+    }
+  },
+  async delete (req, res) {
+    try {
+      const { bookmarkId } = req.params
+      const bookmark = await Bookmark.findById(bookmarkId)
+      await bookmark.destory()
+      res.send(bookmark)
+    } catch (err) {
+      res.status(500).send({
+        error: 'an error has bccured trying to delete the bookmark.'
       })
     }
   }
