@@ -23,6 +23,13 @@ module.exports = (app) => {
     BookmarksController.index)
   app.post('/bookmarks',
     BookmarksController.post)
-  app.get('/bookmarks/bookmarkId',
+  // app.delete('/bookmarks/:bookmarkId',
+  //   BookmarksController.remove)
+  app.delete('/bookmarks/:bookmarkId',
     BookmarksController.delete)
+  // app.delete('/bookmarks/:bookmarkId', (req, res) => {
+  //   res.send({
+  //     message: 'Hello Delete form routes.js'
+  //   })
+  // })
 }
