@@ -17,6 +17,9 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import BookmarksService from '@/services/BookmarksService'
+
 export default {
   data () {
     return {
@@ -36,16 +39,20 @@ export default {
           descending: true
         }
       ],
-      bookmarks: [
-        {
-          title: 'hello world1',
-          artist: 'testing1'
-        },
-        {
-          title: 'hello world2',
-          artist: 'testing2'
-        }
-      ]
+      bookmarks: []
+    }
+  },
+  computed: {
+    ...mapState([
+      'isUserLoggedIn',
+      'user'
+    ])
+  },
+  async mounted () {
+    if (this.isUserLoggedIn) {
+      this.bookmarks = (await BookmarksService.index({
+        userId: this.user.id
+      })).data
     }
   }
 }

@@ -53,7 +53,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import BookmarkService from '@/services/BookmarkService'
+import BookmarksService from '@/services/BookmarksService'
 
 export default {
   props: [
@@ -75,7 +75,7 @@ export default {
         return
       }
       try {
-        this.bookmark = (await BookmarkService.index({
+        this.bookmark = (await BookmarksService.index({
           songId: this.song.id,
           userId: this.$store.state.user.id
         })).data
@@ -90,11 +90,11 @@ export default {
       console.log('this.song.id: ', this.song.id)
       console.log('userId: ', this.$store.state.user.id)
       try {
-        this.bookmark = (await BookmarkService.post({
+        this.bookmark = (await BookmarksService.post({
           songId: this.song.id,
           userId: this.$store.state.user.id
         })).data
-        this.bookmark = (await BookmarkService.index({
+        this.bookmark = (await BookmarksService.index({
           songId: this.song.id,
           userId: this.$store.state.user.id
         })).data
@@ -110,7 +110,7 @@ export default {
         console.log('this.song.id: ', this.song.id)
         console.log('userId: ', this.$store.state.user.id)
         console.log('this.bookmark.id: ', this.bookmark.id)
-        await BookmarkService.delete(this.bookmark.id)
+        await BookmarksService.delete(this.bookmark.id)
         console.log('**unSetAsBookmark - end')
         this.bookmark = null
       } catch (err) {
