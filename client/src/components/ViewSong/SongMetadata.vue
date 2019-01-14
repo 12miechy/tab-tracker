@@ -67,6 +67,7 @@ export default {
   computed: {
     ...mapState([
       'isUserLoggedIn'
+      // ,'user'
     ])
   },
   watch: {
@@ -75,10 +76,13 @@ export default {
         return
       }
       try {
-        this.bookmark = (await BookmarksService.index({
+        const bookmarks = (await BookmarksService.index({
           songId: this.song.id,
           userId: this.$store.state.user.id
         })).data
+        if (bookmarks.length) {
+          this.bookmark = bookmarks[0]
+        }
       } catch (err) {
         console.log(err)
       }
@@ -88,16 +92,21 @@ export default {
     async setAsBookmark () {
       console.log('**setAsBookmark')
       console.log('this.song.id: ', this.song.id)
-      console.log('userId: ', this.$store.state.user.id)
+      // console.log('userId: ', this.user.id)
       try {
         this.bookmark = (await BookmarksService.post({
           songId: this.song.id,
           userId: this.$store.state.user.id
         })).data
-        this.bookmark = (await BookmarksService.index({
+        console.log('****BookmarksService.post')
+        const bookmarks = (await BookmarksService.index({
           songId: this.song.id,
           userId: this.$store.state.user.id
         })).data
+        console.log('****BookmarksService.index')
+        if (bookmarks.length) {
+          this.bookmark = bookmarks[0]
+        }
         console.log('this.bookmark: ', this.bookmark)
         console.log('this.bookmark.id: ', this.bookmark.id)
       } catch (err) {
@@ -108,7 +117,7 @@ export default {
       try {
         console.log('**unSetAsBookmark')
         console.log('this.song.id: ', this.song.id)
-        console.log('userId: ', this.$store.state.user.id)
+        // console.log('userId: ', this.user.id)
         console.log('this.bookmark.id: ', this.bookmark.id)
         await BookmarksService.delete(this.bookmark.id)
         console.log('**unSetAsBookmark - end')
