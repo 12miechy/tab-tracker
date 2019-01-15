@@ -24,7 +24,7 @@ module.exports = {
           history.Song,
           history
         ))
-      res.send(histories)
+      res.send(_.uniqBy(histories, history => history.SongId))
     } catch (err) {
       res.status(500).send({
         error: 'an error has bccured trying to fetch the history.'
