@@ -7,7 +7,8 @@ const _ = require('lodash')
 module.exports = {
   async index (req, res) {
     try {
-      const { songId, userId } = req.query
+      const userId = req.user.id
+      const { songId } = req.query
       const where = {
         UserId: userId
       }

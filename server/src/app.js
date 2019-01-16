@@ -10,6 +10,8 @@ app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors()) // CORSを許可する
 
+require('./passport')
+
 require('./routes')(app)
 
 sequelize.sync()
