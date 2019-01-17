@@ -38,7 +38,8 @@ module.exports = {
   },
   async post (req, res) {
     try {
-      const { songId, userId } = req.body
+      const userId = req.user.id
+      const { songId } = req.body
       console.log('BookmarksController:')
       console.log('req.body:', req.body)
       console.log('songId', songId)
@@ -72,13 +73,14 @@ module.exports = {
       console.log('req.params,', req.params)
       // console.log('req.user.id,', req.user.id)
       // const userId = req.user.id
+      const userId = req.user.id
       const { bookmarkId } = req.params
       console.log('bookmarkId,', bookmarkId)
       // const bookmark = await Bookmark.findById(bookmarkId)
       const bookmark = await Bookmark.findOne({
         where: {
-          Id: bookmarkId
-          // , UserId: userId
+          Id: bookmarkId,
+          UserId: userId
         }
       })
       console.log(bookmark)
