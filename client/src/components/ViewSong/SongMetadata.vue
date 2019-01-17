@@ -90,37 +90,23 @@ export default {
   },
   methods: {
     async setAsBookmark () {
-      console.log('**setAsBookmark')
-      console.log('this.song.id: ', this.song.id)
-      // console.log('userId: ', this.user.id)
       try {
         this.bookmark = (await BookmarksService.post({
           songId: this.song.id
-          // , userId: this.$store.state.user.id
         })).data
-        console.log('****BookmarksService.post')
         const bookmarks = (await BookmarksService.index({
           songId: this.song.id
-          // , userId: this.$store.state.user.id
         })).data
-        console.log('****BookmarksService.index')
         if (bookmarks.length) {
           this.bookmark = bookmarks[0]
         }
-        console.log('this.bookmark: ', this.bookmark)
-        console.log('this.bookmark.id: ', this.bookmark.id)
       } catch (err) {
         console.log(err)
       }
     },
     async unSetAsBookmark () {
       try {
-        console.log('**unSetAsBookmark')
-        console.log('this.song.id: ', this.song.id)
-        // console.log('userId: ', this.user.id)
-        console.log('this.bookmark.id: ', this.bookmark.id)
         await BookmarksService.delete(this.bookmark.id)
-        console.log('**unSetAsBookmark - end')
         this.bookmark = null
       } catch (err) {
         console.log(err)

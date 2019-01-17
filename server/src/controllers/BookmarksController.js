@@ -40,10 +40,6 @@ module.exports = {
     try {
       const userId = req.user.id
       const { songId } = req.body
-      console.log('BookmarksController:')
-      console.log('req.body:', req.body)
-      console.log('songId', songId)
-      console.log('userId', userId)
       const bookmark = await Bookmark.findOne({
         where: {
           SongId: songId,
@@ -69,21 +65,14 @@ module.exports = {
   },
   async delete (req, res) {
     try {
-      console.log('**** hello bookmarks delete!')
-      console.log('req.params,', req.params)
-      // console.log('req.user.id,', req.user.id)
-      // const userId = req.user.id
       const userId = req.user.id
       const { bookmarkId } = req.params
-      console.log('bookmarkId,', bookmarkId)
-      // const bookmark = await Bookmark.findById(bookmarkId)
       const bookmark = await Bookmark.findOne({
         where: {
           Id: bookmarkId,
           UserId: userId
         }
       })
-      console.log(bookmark)
       if (!bookmark) {
         return res.status(403).send({
           error: 'you do not have access to this bookmark'
